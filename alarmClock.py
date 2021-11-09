@@ -42,24 +42,27 @@ class AlarmClock(tk.Tk):
         self.entryS = ttk.Entry(
             self,
             width='8')
-
+        
+        # Placing entries
         self.entryH.place(relx=0.09, rely=0.47)
         self.entryM.place(relx=0.39, rely=0.47)
         self.entryS.place(relx=0.69, rely=0.47)
 
-        # Creating a button
+        # Creating a button to start timer with
         self.button1 = ttk.Button(
             self,
             text='SET ALARM', 
             command=lambda:Thread(target=self.alarmMode).start())
-
+        
+        # Placing button for starting timer
         self.button1.place(relx=0.09, rely=0.72)
-        self.newThread1 = Thread(target=self.getTime).start()
 
         # Calling an update every second
         self.label.after(1000, self.update)
 
-        self.newThread2 = Thread(target=self.update).start()
+        # Creating a thread for updating label and getting time
+        self.newThread1 = Thread(target=self.update).start()
+        self.newThread2 = Thread(target=self.getTime).start()
 
     def getTime(self):
         return time.strftime('%H:%M:%S')
