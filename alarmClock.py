@@ -43,9 +43,9 @@ class AlarmClock(tk.Tk):
             self,
             width='8')
 
-        self.entryS.place(relx=0.09, rely=0.47)
+        self.entryH.place(relx=0.09, rely=0.47)
         self.entryM.place(relx=0.39, rely=0.47)
-        self.entryH.place(relx=0.69, rely=0.47)
+        self.entryS.place(relx=0.69, rely=0.47)
 
         # Creating a button
         self.button1 = ttk.Button(
@@ -71,11 +71,19 @@ class AlarmClock(tk.Tk):
 
     def alarmMode(self):
         print('Entering alarm mode...')
+        print('Alarm set at:', self.getTime())
+
         self.aMode = True
 
         hours = int(self.entryH.get())
         minutes = int(self.entryM.get())
         seconds = int(self.entryS.get())
+
+        if hours == 0:
+            print(f'Alarm set for {hours}0:{minutes}:{seconds}')
+        else:
+            print(f'Alarm set for {hours}:{minutes}:{seconds}')
+
         while self.aMode == True:
             now = datetime.now().time()
             if now.hour == hours and now.minute == minutes and now.second == seconds:
