@@ -87,12 +87,7 @@ class AlarmClock(tk.Tk):
         minutes = int(self.entryM.get())
         seconds = int(self.entryS.get())
 
-        if hours == 0:
-            print(f'Alarm set for {hours}0:{minutes}:{seconds}')
-        if hours < 10:
-            print(f'Alarm set for 0{hours}:{minutes}:{seconds}')
-        else:
-            print(f'Alarm set for {hours}:{minutes}:{seconds}')
+        print(f'Alarm set for {hours:02d}:{minutes:02d}:{seconds:02d}')
 
         while self.aMode == True:
             now = datetime.now().time()
