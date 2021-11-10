@@ -3,11 +3,16 @@ from tkinter import ttk
 import time
 from threading import Thread
 from datetime import datetime
+import simpleaudio as sa
 
 class AlarmClock(tk.Tk):
 
     def __init__(self):
         super().__init__()
+
+        # Path for sound file
+        myPath = r'C:/Users/arttu/OneDrive - Turun ammattikorkeakoulu/Python/soundEffects/alarmClockBeep.wav'
+        self.alarmSound = sa.WaveObject.from_wave_file(myPath)
 
         self.aMode = False
 
@@ -42,7 +47,7 @@ class AlarmClock(tk.Tk):
         self.entryS = ttk.Entry(
             self,
             width='8')
-        
+
         # Placing entries
         self.entryH.place(relx=0.09, rely=0.47)
         self.entryM.place(relx=0.39, rely=0.47)
@@ -53,7 +58,7 @@ class AlarmClock(tk.Tk):
             self,
             text='SET ALARM', 
             command=lambda:Thread(target=self.alarmMode).start())
-        
+
         # Placing button for starting timer
         self.button1.place(relx=0.09, rely=0.72)
 
@@ -84,6 +89,8 @@ class AlarmClock(tk.Tk):
 
         if hours == 0:
             print(f'Alarm set for {hours}0:{minutes}:{seconds}')
+        if hours < 10:
+            print(f'Alarm set for 0{hours}:{minutes}:{seconds}')
         else:
             print(f'Alarm set for {hours}:{minutes}:{seconds}')
 
@@ -92,6 +99,9 @@ class AlarmClock(tk.Tk):
             if now.hour == hours and now.minute == minutes and now.second == seconds:
                 self.aMode = False
                 print('Alarm noises')
+                self.playSound = self.alarmSound.play()
+                self.playSound.wait_done()
+                
 
 if __name__ == "__main__":
     clock = AlarmClock()
