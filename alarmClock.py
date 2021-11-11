@@ -4,6 +4,7 @@ import time
 from threading import Thread
 from datetime import datetime
 import simpleaudio as sa
+import os
 
 class AlarmClock(tk.Tk):
 
@@ -11,7 +12,7 @@ class AlarmClock(tk.Tk):
         super().__init__()
 
         # Path for sound file
-        myPath = r'C:/Users/arttu/OneDrive - Turun ammattikorkeakoulu/Python/soundEffects/alarmClockBeep.wav'
+        myPath = os.path.abspath('soundEffects\\alarmClockBeep.wav')
         self.alarmSound = sa.WaveObject.from_wave_file(myPath)
 
         self.aMode = False
@@ -80,14 +81,14 @@ class AlarmClock(tk.Tk):
     def alarmMode(self):
         print('Entering alarm mode...')
         print('Alarm set at:', self.getTime())
-
+        
         self.aMode = True
 
         hours = int(self.entryH.get())
         minutes = int(self.entryM.get())
         seconds = int(self.entryS.get())
 
-        print(f'Alarm set for {hours:02d}:{minutes:02d}:{seconds:02d}')
+        print(f'Alarm set for: {hours:02d}:{minutes:02d}:{seconds:02d}')
 
         while self.aMode == True:
             now = datetime.now().time()
