@@ -117,9 +117,10 @@ class AlarmClock(tk.Tk):
 
     def getAlarmSound(self, selectedAlarmSound, soundMenuOptions):
         # Paths for sound files
-        alarmSound1Path = os.path.abspath('soundEffects\\alarmClockBeep.wav')
-        alarmSound2Path = os.path.abspath('soundEffects\\alarmClockBeep2.wav')
-        alarmSound3Path = os.path.abspath('soundEffects\\alarmClockBeep3.wav')
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        alarmSound1Path = dir_path + '\\soundEffects\\alarmClockBeep.wav'
+        alarmSound2Path = dir_path + '\\soundEffects\\alarmClockBeep2.wav'
+        alarmSound3Path = dir_path + '\\soundEffects\\alarmClockBeep3.wav'
 
         alarmSound1 = sa.WaveObject.from_wave_file(alarmSound1Path)
         alarmSound2 = sa.WaveObject.from_wave_file(alarmSound2Path)
